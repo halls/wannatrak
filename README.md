@@ -1,4 +1,6 @@
 Open Source GPS Tracking System
+===============================
+
 This application allows to use Android phones and mobile phones with J2ME support as mobile trackers.
 Users can use phones with internal GPS as well as with external device via Bluetooth.
 
