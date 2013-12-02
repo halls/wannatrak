@@ -1,0 +1,197 @@
+.subjectsWidgetCell {
+    vertical-align: top;
+}
+.subjectsWidgetTitle {
+    font-size: 1.1em;
+    margin-left: 0.5em;
+}
+.subjectsWidget {
+    background-color: #f7f7fd;
+    width: 16em;
+}
+.subjectItemName {
+    margin-left: 0.5em;
+    font-size: 0.9em;
+}
+.subjectItemUpdated {
+    color: #777777;
+    font-size: 0.55em;
+    margin-left: 1em;
+    margin-bottom: 0.2em;
+}
+.subjectItemUpdated-tracking {
+    color: #006600;
+}
+.subjectLoading {
+    margin-left: 1em;
+    margin-bottom: 0.1em;
+}
+.subjectsErrorLabel {
+    text-align: left;
+    color: red;
+    font-size: 0.8em;
+}
+.subjectsWaitingLabel {
+    text-align: center;
+    color: darkgray;
+    font-size: 0.8em;
+}
+.removeButton {
+    font-size: 0.8em;
+}
+.retryHyperlink {
+    font-size: 0.8em;
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+.retryHyperlink-clicked {
+    color: darkblue;
+}
+.subjectInfoWidget {
+    background-color: #ddffba;
+    width: 18em;
+}
+.subjectInfoInputTable {
+    background-color: #ddffba;
+}
+.subjectInfoInputLabel {
+    font-size: 0.8em;
+}
+.subjectInfoCloseLabel{
+    font-size: 0.7em;
+    padding-top: 0.2em;
+    padding-bottom: 1em;
+    padding-right: 0.4em;
+    cursor: pointer;
+    color: darkblue;
+    text-decoration: underline;
+}
+.nameInputBox {
+    width: 19em;
+    font-size: 0.8em;
+}
+.savePeriodInputBox {
+    width: 4em;
+    text-align: right;
+    font-size: 0.8em;
+}
+.sendPeriodInputBox {
+    width: 4em;
+    text-align: right;
+    font-size: 0.8em;
+}
+.subjectInfoInputBoxCell {
+    text-align: left;
+    padding: 7px;
+}
+.slogan-subjectInfo {
+    text-align: left;
+    margin-left: 0.5em;
+}
+.subjectItem {
+    width: 100%;
+    cursor: pointer;
+}
+.subjectItem-demo {
+    width: 100%;
+    cursor: default;
+}
+.subjectItem-selected {
+    background-color: white;
+}
+.subjectItem-demoChecked {
+    cursor: pointer;
+}
+.subjectStateLabel {
+    font-size: 0.8em;
+    text-align: right;
+}
+.subjectStateValue {
+    font-size: 0.8em;
+}
+.speedLabel {
+    font-size: 0.8em;
+    text-align: right;
+}
+.speedValue {
+    font-size: 0.8em;
+}
+.speedValue-noData {
+    color: #777777;
+    font-size: 0.8em;
+}
+.altitudeLabel {
+    font-size: 0.8em;
+    text-align: right;
+}
+.altitudeValue {
+    font-size: 0.8em;
+}
+.altitudeValue-noData {
+    color: #777777;
+    font-size: 0.8em;
+}
+.saveButton {
+    font-size: 1em;
+    text-align: center;
+}
+.settingsPanel {
+    border-top: 2px solid white;
+}
+.subjectInfoQues {
+    font-size: 0.7em;
+    margin-left: 0.5em;
+    margin-bottom: 0.1em;
+    cursor: pointer;
+    color: blue;
+    text-decoration: none;
+}
+.subjectInfoQues-clicked {
+    color: darkblue;
+}
+.savePeriodInfo {
+    width: 22em;
+    background-color: #f7f7fd;
+    border:  #ddffba solid 2px;
+    font-size: 0.8em;
+}
+.savePeriodInfoWidget{
+    margin-top: -1em;
+    padding: 1em;
+    font-size: 0.8em;
+    text-align: left;
+}
+.sendPeriodInfo {
+    width: 22em;
+    background-color: #f7f7fd;
+    border:  #ddffba solid 2px;
+    font-size: 0.8em;
+}
+.sendPeriodInfoWidget{
+    margin-top: -1em;
+    padding: 1em;
+    font-size: 0.8em;
+    text-align: left;
+}
+.nameLabel {
+    font-size: 0.8em;
+    margin-top: 1em;
+}
+.settingsWarning {
+    font-size: 0.8em;
+    margin-left: 0.5em;
+    margin-top: -0.2em;
+    color: darkred;
+}
+.statusLabel {
+    text-align: center;
+    margin-top: 0.6em;
+    color: darkgray;
+    font-size: 0.8em;
+}
+.statusLabel-error {
+    text-align: left;
+    margin-left: 0.5em;
+    color: red;
+}

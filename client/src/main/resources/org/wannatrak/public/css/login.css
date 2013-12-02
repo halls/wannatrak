@@ -1,0 +1,50 @@
+.loginWidgetCell {
+    vertical-align: top;
+}
+.loginPanel {
+    background-color: #ddffba;
+}
+.loginInputLabelCell {
+    text-align: right;
+    font-size: 0.8em;
+}
+.loginInputBox {
+    width: 13em;
+    font-size: 0.8em;
+}
+.loginInputBoxCell {
+    text-align: left;
+    padding: 7px;
+}
+.keepMyLoginCheckBox {
+    font-size: 0.8em;
+}
+.remindPass {
+    font-size: 0.8em;
+    margin-top: 1em;
+    margin-left: 0.6em;
+}
+.loginButton {
+    font-size: 1.2em;
+    text-align: center;
+}
+.loginPanel {
+    text-align: right;
+}
+.registerHyperlink {
+    font-size: 1em;
+    margin-top: 1.1em;
+}
+.errorLabel {
+    text-align: left;
+    margin-left: 0.5em;
+    margin-top: 0.6em;
+    color: red;
+    font-size: 0.8em;
+}
+.waitingLabel {
+    text-align: center;
+    margin-top: 0.6em;
+    color: darkgray;
+    font-size: 0.8em;
+}

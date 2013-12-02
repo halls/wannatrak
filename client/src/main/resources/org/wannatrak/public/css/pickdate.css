@@ -1,0 +1,98 @@
+.gwt-DatePicker {
+    cursor: default;
+    border: #00CC00 solid 2px; /*background-color: #66CCFF;*/
+}
+
+.datePickerMonthSelector {
+/*the month selector widget*/
+    background-color: #fff;
+    text-align: center;
+    width: 100%;
+}
+
+.datePickerMonth {
+/*the month in the month selector widget */
+
+    font-weight: bold;
+}
+
+.datePickerPreviousButton {
+/*the previous month button*/
+    cursor: pointer;
+}
+
+.datePickerNextButton {
+/*the next month button*/
+    cursor: pointer;
+}
+
+.datePickerDays {
+/*the portion of the picker that shows the days*/
+    font-size: 0.8em;
+    background-color: #fff;
+    width: 100%;
+}
+
+.datePickerWeekdayLabel {
+/*the label over weekdays*/
+    text-align: center;
+    font-size: 0.8em; /*background-color: #66CCFF;*/
+}
+
+.datePickerWeekendLabel {
+/*the label over weekends*/
+    text-align: center;
+    font-size: 0.8em; /*background-color: #66CCFF;*/
+}
+
+.datePickerDay {
+/*a single day*/
+    border: #fff solid 1px;
+    padding: 1px 3px;
+    text-align: right;
+    cursor: pointer;
+
+}
+
+.datePickerDayIsToday {
+/*today's date*/
+    border: #0066CC solid 1px;
+    color: #0066CC;
+}
+
+.datePickerDayIsWeekend {
+/*a weekend day*/
+}
+
+.datePickerDayIsFiller {
+/*a day in another month*/
+    color: #646464;
+}
+
+.datePickerDayIsValue {
+/*the selected day*/
+    color: darkblue;
+    border: #99CC66 solid 1px;
+    background-color: #DDFFBA;
+    cursor: default;
+}
+
+.datePickerDayIsDisabled {
+/*a disabled day*/
+    color: lightgray;
+    cursor: default;
+}
+
+.datePickerDayIsHighlighted {
+/*the currently highlighted day*/
+    color: #0066CC;
+    border: #0066CC solid 1px;
+    background-color: #F7F7FD;
+}
+
+.datePickerDayIsValueAndHighlighted {
+/*the highlighted day if it is also selected*/
+    border: #99CC66 solid 1px;
+    background-color: #DDFFBA;
+    color: darkblue;
+}

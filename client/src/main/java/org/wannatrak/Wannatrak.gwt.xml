@@ -1,0 +1,42 @@
+<!--
+  ~ Copyright 2009 Andrey Khalzov, and individual contributors as indicated by the @author tag.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and limitations under the License.
+  -->
+
+<module>
+
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='com.google.gwt.maps.GoogleMaps'/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
+
+    <extend-property name="locale" values="ru"/>
+    <extend-property name="locale" values="en"/>
+
+    <entry-point class='org.wannatrak.client.Client'/>
+    
+    <stylesheet src="css/client.css" />
+    <stylesheet src="css/header.css" />
+    <stylesheet src="css/login.css" />
+    <stylesheet src="css/register.css" />
+    <stylesheet src="css/subjects.css" />
+    <stylesheet src="css/filter.css" />
+    <stylesheet src="css/demo.css" />
+    <stylesheet src="css/setup.css" />
+    <stylesheet src="css/setnewpass.css" />
+    <stylesheet src="css/input.css" />
+    <stylesheet src="css/pickdate.css" />
+
+    <servlet path="/subjects" class="org.wannatrak.server.SubjectServiceImpl"/>
+    <servlet path="/login" class="org.wannatrak.server.LoginServiceImpl"/>
+    <servlet path="/register" class="org.wannatrak.server.RegisterServiceImpl"/>
+</module>

@@ -1,0 +1,25 @@
+.inputPanel {
+    background-color: #f7f7fd;
+    width: 42em;
+}
+.inputLabelCell {
+    text-align: right;
+    font-size: 0.8em;
+}
+.inputBoxCell {
+    text-align: left;
+    padding: 7px;
+}
+.inputBox {
+    width: 18em;
+    font-size: 0.8em;
+}
+.captchaTitle {
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    font-size: 0.8em;
+}
+.reloadCaptcha {
+    margin-left: 0.8em;
+    font-size: 0.8em;
+}

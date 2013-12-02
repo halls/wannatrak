@@ -1,0 +1,146 @@
+<!--
+  ~ Copyright 2009 Andrey Khalzov, and individual contributors as indicated by the @author tag.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.wannatrak</groupId>
+		<artifactId>wannatrak-mobile</artifactId>
+		<version>${projectVersion}</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.wannatrak</groupId>
+	<artifactId>wannatrak-mobile-en</artifactId>
+
+	<name>Wannatrak J2ME application (English version)</name>
+
+	<properties>
+		<j2me.locale>en</j2me.locale>
+	</properties>
+
+	<build>
+		<sourceDirectory>../src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>../src/main/resources</directory>
+				<includes>
+					<include>locale</include>
+					<include>img/icon.png</include>
+					<include>img/logo.png</include>
+					<include>messages.properties</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.4</source>
+					<target>1.4</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.pyx4me</groupId>
+				<artifactId>j2me-maven-plugin</artifactId>
+				<version>2.0.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>package</goal>
+							<goal>jad</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<midletName>Wannatrak</midletName>
+					<midletVendor>Wannatrak.com</midletVendor>
+
+					<appendClassifier>false</appendClassifier>
+					<useWtkLibs>false</useWtkLibs>
+					<proguard>false</proguard>
+
+					<jadfile>wannatrak</jadfile>
+					<jarfile>wannatrak</jarfile>
+
+					<wtkHome>${env.WTK_HOME}</wtkHome>
+					<libs>
+						<lib>${env.WTK_HOME}/lib/cldcapi10.jar</lib>
+						<lib>${env.WTK_HOME}/lib/midpapi20.jar</lib>
+						<lib>${env.WTK_HOME}/lib/jsr082.jar</lib>
+						<lib>${env.WTK_HOME}/lib/jsr179.jar</lib>
+					</libs>
+
+					<midlets>
+						<MIDlet>
+							<name>Wannatrak</name>
+							<icon>/img/icon.png</icon>
+							<class>org.wannatrak.mobile.WannatrakMidlet</class>
+						</MIDlet>
+					</midlets>
+
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>UpdateJ2MEInClient</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.3</version>
+						<executions>
+							<execution>
+								<id>Copy to client</id>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<phase>install</phase>
+								<configuration>
+									<outputDirectory>../../client/war/download</outputDirectory>
+									<resources>
+										<resource>
+											<directory>target</directory>
+											<includes>
+												<include>wannatrak.jad</include>
+												<include>wannatrak.jar</include>
+											</includes>
+										</resource>
+									</resources>
+									<overwrite>true</overwrite>
+									<encoding>UTF-8</encoding>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

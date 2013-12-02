@@ -1,0 +1,34 @@
+.lines {
+    background: url( ../img/lines.png ) repeat-x;
+    width: 100%;
+    height: 0.9em;
+    margin-top: 5px;
+}
+.topAdv {
+    width: 97%;
+}
+.logo {
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.header {
+    width: 100%;
+    text-align: right;
+}
+.headerCell {
+    width: 100%;
+}
+.loginInfo {
+    font-size: 0.8em;
+    margin-top: 0.2em;
+}
+.loginInfoCell {
+    width: 10%;
+    text-align: right;
+    vertical-align: top;
+}
+.loginInfoItem {
+    margin-left: 1em;
+    margin-right: 1em;
+}

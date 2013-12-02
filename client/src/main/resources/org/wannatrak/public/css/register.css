@@ -1,0 +1,50 @@
+.registerWidgetInputPanel {
+    background-color: #f7f7fd;
+    width: 42em;
+}
+.registerInputLabelCell {
+    text-align: right;
+    font-size: 0.8em;
+}
+.registerInputBoxCell {
+    text-align: left;
+    padding: 7px;
+}
+.registerInputBox {
+    width: 18em;
+    font-size: 0.8em;
+}
+.registrationLabel {
+    font-size: 1.25em;
+}
+.registerButton {
+    font-size: 1.1em;
+}
+.checkLoginButton {
+    margin-left: 0.5em;
+    font-size: 0.8em;
+}
+.checkLoginResultLabel {
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    color: darkblue;
+}
+.checkLoginResultLabel-waiting {
+    color: darkgray;
+}
+.checkLoginResultLabel-warning {
+    color: darkred;
+}
+.captcha {
+    margin-left: 0.5em;
+}
+.comment {
+    font-size: 0.8em;
+    margin-left: 0.5em;
+    margin-top: -0.2em;
+    color: #666666;
+}
+.comment-warning {
+    color: darkred;
+}

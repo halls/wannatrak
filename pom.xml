@@ -1,0 +1,212 @@
+<!--
+  ~ Copyright 2009 Andrey Khalzov, and individual contributors as indicated by the @author tag.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.wannatrak</groupId>
+    <artifactId>wannatrak</artifactId>
+    <version>${projectVersion}</version>
+    <url>http://www.wannatrak.org</url>
+
+    <name>Wannatrak</name>
+    <description>Open Source GPS Tracking System</description>
+
+    <packaging>pom</packaging>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <distributionManagement>
+        <repository>
+            <id>internal</id>
+            <url>http://archiva.wannatrak.org/repository/internal/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://archiva.wannatrak.org/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <developers>
+        <developer>
+            <id>halls</id>
+            <name>Andrey Khalzov</name>
+            <email>andrey.khalzov@wannatrak.org</email>
+            <timezone>+4</timezone>
+            <roles>
+                <role>Lead</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>sergey</id>
+            <name>Sergey Grachev</name>
+            <email>sergey.grachev@wannatrak.org</email>
+            <timezone>+4</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>anton</id>
+            <name>Anton Sinyagovsky</name>
+            <email>anton.sinyagovsky@wannatrak.org</email>
+            <timezone>+4</timezone>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <inceptionYear>2009</inceptionYear>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>http://www.wannatrak.org/projects/wannatrak/issues/</url>
+    </issueManagement>
+
+    <scm>
+        <url>http://www.wannatrak.org/repositories/show/wannatrak</url>
+        <connection>scm:bazaar:http://bzr.wannatrak.org/main</connection>
+        <developerConnection>scm:bazaar:sftp://username:password@wannatrak.org/~/wannatrak</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <projectVersion>0.92-SNAPSHOT</projectVersion>
+
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+
+        <jbossConfig>default</jbossConfig>
+        <jboss.config.path>~/server/${jbossConfig}</jboss.config.path>
+    </properties>
+
+    <modules>
+        <module>middleware</module>
+        <module>device</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.wannatrak</groupId>
+                <artifactId>wannatrak-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wannatrak</groupId>
+                <artifactId>wannatrak-device</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wannatrak</groupId>
+                <artifactId>wannatrak-middleware</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>jboss</id>
+            <name>JBoss repository</name>
+            <url>http://repository.jboss.org/maven2</url>
+        </repository>
+
+        <repository>
+            <id>ibiblio</id>
+            <name>Ibiblio repository</name>
+            <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>WithClient</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>client</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>WithClientAndJ2ME</id>
+            <modules>
+                <module>mobile</module>
+                <module>client</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>Deploy2JBoss</id>
+        </profile>
+        <profile>
+            <id>UpdateJ2MEInClient</id>
+        </profile>
+        <profile>
+            <id>InitDB</id>
+            <modules>
+                <module>config</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>InitJBoss</id>
+            <modules>
+                <module>config</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>LoadDemo</id>
+            <modules>
+                <module>config</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/../out</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/target</directory>
+                                    <includes>
+                                        <include>*.war</include>
+                                        <include>*.jar</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

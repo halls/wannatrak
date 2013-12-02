@@ -1,0 +1,5 @@
+.borderedIntro {
+    border: dashed #00CC00 2px;
+    font-size: 0.9em;
+    margin-top: 15px
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2009 Andrey Khalzov, and individual contributors as indicated by the @author tag.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and limitations under the License.
+  -->
+
+<!-- $Id: mail-service.xml 62349 2007-04-15 16:48:15Z dimitris@jboss.org $ -->
+<server>
+
+    <!-- ==================================================================== -->
+    <!-- Mail Connection Factory                                              -->
+    <!-- ==================================================================== -->
+
+    <mbean code="org.jboss.mail.MailService"
+           name="jboss:service=Mail">
+        <attribute name="JNDIName">java:/Mail</attribute>
+        <attribute name="User">${mail.user}</attribute>
+        <attribute name="Password">${mail.user.password}</attribute>
+        <attribute name="Configuration">
+            <configuration>
+                <!-- Change to your mail server prototocol -->
+                <property name="mail.store.protocol" value="pop3"/>
+                <property name="mail.transport.protocol" value="smtp"/>
+
+                <!-- Change to the user who will receive mail  -->
+                <property name="mail.user" value="${mail.user}"/>
+
+                <!-- Change to the mail server  -->
+                <property name="mail.pop3.host" value="pop3.nosuchhost.nosuchdomain.com"/>
+
+                <!-- Change to the SMTP gateway server -->
+                <property name="mail.smtp.host" value="${mail.smtp.host}"/>
+
+                <!-- Change to the address mail will be from  -->
+                <property name="mail.from" value="${mail.from}"/>
+
+                <!-- Enable debugging output from the javamail classes -->
+                <property name="mail.debug" value="false"/>
+
+                <property name="mail.smtp.auth" value="${mail.smtp.auth}"/>
+            </configuration>
+        </attribute>
+        <depends>jboss:service=Naming</depends>
+    </mbean>
+
+</server>

@@ -1,0 +1,10 @@
+.setupPanel {
+    background-color: #f7f7fd;
+    width: 42em;
+}
+.setupLabel {
+    font-size: 1.25em;
+}
+.closeButton {
+    font-size: 1.1em;
+}

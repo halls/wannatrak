@@ -1,0 +1,9 @@
+MIDlet-Jar-URL: gdebox.jar
+MIDlet-Jar-Size: 111556
+MIDlet-Name: Гдебокс
+MIDlet-Vendor: Gdebox.ru
+MIDlet-Version: 0.92.07
+MIDlet-1: Гдебокс, /img/icon_ru.png, org.wannatrak.mobile.WannatrakMidlet
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Icon: /img/icon_ru.png

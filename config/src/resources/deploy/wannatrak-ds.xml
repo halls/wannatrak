@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2009 Andrey Khalzov, and individual contributors as indicated by the @author tag.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and limitations under the License.
+  -->
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>WannatrakDS</jndi-name>
+    <connection-url>${db.url}/${db.name}</connection-url>
+    <driver-class>${db.driver}</driver-class>
+    <user-name>${db.username}</user-name>
+    <password>${db.password}</password>
+    <min-pool-size>5</min-pool-size>
+    <max-pool-size>100</max-pool-size>
+    <idle-timeout-minutes>5</idle-timeout-minutes>
+    <config-property name="connectTimeout" type="java.lang.Integer">5</config-property>
+    <config-property name="socketTimeout" type="java.lang.Integer">10</config-property>
+    <config-property name="interactiveClient" type="java.lang.Boolean">true</config-property>
+    <!--<transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>-->
+    <track-statements/>
+    <prepared-statement-cache-size>200</prepared-statement-cache-size>
+    <metadata>
+        <type-mapping>${db.type}</type-mapping>
+    </metadata>
+
+  </local-tx-datasource>
+</datasources>

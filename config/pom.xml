@@ -1,0 +1,233 @@
+<!--
+  ~ Copyright 2009 Andrey Khalzov, and individual contributors as indicated by the @author tag.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.wannatrak</groupId>
+        <artifactId>wannatrak</artifactId>
+        <version>${projectVersion}</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.wannatrak</groupId>
+    <artifactId>config</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Wannatrak config</name>
+
+    <properties>
+        <db.url>jdbc:postgresql://127.0.0.1</db.url>
+        <db.driver>org.postgresql.Driver</db.driver>
+        <db.type>PostgreSQL 8.3</db.type>
+        <db.username>postgres</db.username>
+        <db.password>postgres</db.password>
+        <db.name>wannatrak</db.name>
+
+        <mail.user>nobody</mail.user>
+        <mail.user.password>password</mail.user.password>
+        <mail.smtp.host>localhost</mail.smtp.host>
+        <mail.smtp.auth>false</mail.smtp.auth>
+        <mail.from>wannatrak@wannatrak.com</mail.from>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.wannatrak</groupId>
+            <artifactId>wannatrak-middleware</artifactId>
+            <version>${projectVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>8.3-603.jdbc4</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>InitJBoss</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.3</version>
+                        <executions>
+                            <execution>
+                                <id>Init JBoss</id>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                    <outputDirectory>${jboss.config.path}</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/resources</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                    <overwrite>true</overwrite>
+                                    <encoding>UTF-8</encoding>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>Copy libs to JBoss</id>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                    <outputDirectory>${jboss.config.path}/lib</outputDirectory>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>joda-time</groupId>
+                                            <artifactId>joda-time-hibernate</artifactId>
+                                            <version>1.0</version>
+                                            <type>jar</type>
+                                            <destFileName>joda-time-hibernate.jar</destFileName>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>joda-time</groupId>
+                                            <artifactId>joda-time</artifactId>
+                                            <version>1.6</version>
+                                            <type>jar</type>
+                                            <destFileName>joda-time.jar</destFileName>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>postgresql</groupId>
+                                            <artifactId>postgresql</artifactId>
+                                            <version>8.3-603.jdbc4</version>
+                                            <type>jar</type>
+                                            <destFileName>postgresql.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <overWriteIfNewer>true</overWriteIfNewer>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>InitDB</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>8.3-603.jdbc4</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <driver>${db.driver}</driver>
+                            <url>${db.url}</url>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                            <autocommit>true</autocommit>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>Init Wannatrak DB</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <delimiter>;</delimiter>
+                                    <sqlCommand>
+                                        CREATE DATABASE ${db.name} ENCODING 'UTF8';;
+                                    </sqlCommand>
+                                    <filtering>true</filtering>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>LoadDemo</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>8.3-603.jdbc4</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <driver>${db.driver}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                            <autocommit>true</autocommit>
+                            <encoding>utf8</encoding>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>Init Wannatrak DB</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <url>${db.url}</url>
+                                    <delimiter>;</delimiter>
+                                    <sqlCommand>
+                                        CREATE DATABASE ${db.name} ENCODING 'UTF8';;
+                                    </sqlCommand>
+                                    <filtering>true</filtering>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>Init demo data</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <url>${db.url}/${db.name}</url>
+                                    <srcFiles>
+                                        <srcFile>src/resources/demo-dump.sql</srcFile>
+                                    </srcFiles>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
