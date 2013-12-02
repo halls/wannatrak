@@ -35,7 +35,7 @@
     </repositories>
 
     <properties>
-        <gwtVersion>2.6.0-rc1</gwtVersion>
+        <gwtVersion>1.7.0</gwtVersion>
     </properties>
 
     <dependencies>
@@ -88,10 +88,17 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.github.branflake2267</groupId>-->
+            <!--<artifactId>gwt-maps-api</artifactId>-->
+            <!--<version>3.10.0-alpha-6</version>-->
+        <!--</dependency>-->
+
         <dependency>
-            <groupId>com.github.branflake2267</groupId>
-            <artifactId>gwt-maps-api</artifactId>
-            <version>3.10.0-alpha-6</version>
+            <groupId>com.google.gwt.google-apis</groupId>
+            <artifactId>gwt-maps</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
