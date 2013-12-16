@@ -20,7 +20,9 @@
 package org.wannatrak.client;
 
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.geom.LatLng;
+
+import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.layers.KmlLayer;
 import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
 import com.google.gwt.maps.client.overlay.GeoXmlLoadCallback;
 import com.google.gwt.maps.client.overlay.Overlay;
@@ -34,14 +36,14 @@ import java.util.*;
 public class MapController {
     private final Mediator mediator;
     private final MapWidget mapWidget;
-    private final Map<Long, Overlay> overlays;
+    private final Map<Long, KmlLayer> layers;
 
 
     public MapController(Mediator mediator, MapWidget mapWidget) {
         this.mediator = mediator;
         this.mapWidget = mapWidget;
 
-        overlays = new HashMap<Long, Overlay>();
+        layers = new HashMap<Long, KmlLayer>();
     }
 
     public void setMapCenter(double latitude, double longitude) {
@@ -63,12 +65,12 @@ public class MapController {
         final Set<Long> subjectsToShow;
         if (updateOnlyNew) {
             subjectsToShow = new HashSet<Long>(subjects);
-            subjectsToShow.removeAll(overlays.keySet());
+            subjectsToShow.removeAll(layers.keySet());
 
-            for (Iterator<Long> it = overlays.keySet().iterator(); it.hasNext(); ) {
+            for (Iterator<Long> it = layers.keySet().iterator(); it.hasNext(); ) {
                 Long subjectId = it.next();
                 if (!subjects.contains(subjectId)) {
-                    mapWidget.removeOverlay(overlays.get(subjectId));
+                    layers.get(subjectId).setMap(null);
                     it.remove();
                 }
             }
@@ -78,6 +80,32 @@ public class MapController {
 
         for (final Long subjectId : subjectsToShow) {
             mediator.showSublectLoading(subjectId);
+
+            String url = "http://" + Window.Location.getHost()
+                    + "/show?subjectId=" + subjectId
+                    + "&sessionId=" + Cookies.getCookie("JSESSIONID")
+                    + "&hfrom=" + fromHour
+                    + "&mfrom=" + fromMinute
+                    + "&dfrom=" + fromDaysAgo
+                    + "&hto=" + toHour
+                    + "&mto=" + toMinute
+                    + "&dto=" + toDaysAgo
+                    + "&valid=" + !showErrors
+                    + "&format=" + DateTimeFormat.getMediumDateTimeFormat().getPattern()
+                    .replaceAll(" ", "_SPACE_")
+                    + "&tzoffset=" + new Date().getTimezoneOffset()
+                    + "&nocache=" + Random.nextInt();
+            KmlLayer route = KmlLayer.newInstance(url);
+            KmlLayer prevOverlay = layers.get(subjectId);
+            if (prevOverlay != null) {
+                prevOverlay.setMap(null);
+            }
+            route.setMap(mapWidget);
+            layers.put(subjectId, route);
+            mediator.hideSubjectLoading(subjectId);
+
+
+/*
             GeoXmlOverlay.load(
                     "http://" + Window.Location.getHost()
                             + "/show?subjectId=" + subjectId
@@ -93,6 +121,7 @@ public class MapController {
                                                 .replaceAll(" ", "_SPACE_")
                             + "&tzoffset=" + new Date().getTimezoneOffset()
                             + "&nocache=" + Random.nextInt(),
+
                     new GeoXmlLoadCallback() {
                         @Override
                         public void onFailure(String url, Throwable caught) {
@@ -101,16 +130,18 @@ public class MapController {
 
                         @Override
                         public synchronized void onSuccess(String url, GeoXmlOverlay overlay) {
-                            final Overlay prevOverlay = overlays.get(subjectId);
+                            KmlLayer route = KmlLayer.newInstance(url);
+                            KmlLayer prevOverlay = layers.get(subjectId);
                             if (prevOverlay != null) {
-                                mapWidget.removeOverlay(prevOverlay);
+                                prevOverlay.setMap(null);
                             }
-                            mapWidget.addOverlay(overlay);
-                            overlays.put(subjectId, overlay);
+                            route.setMap(mapWidget);
+                            layers.put(subjectId, route);
                             mediator.hideSubjectLoading(subjectId);
                         }
                     }
             );
+*/
         }
     }
 }

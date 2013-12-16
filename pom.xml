@@ -101,7 +101,9 @@
 
     <modules>
         <module>middleware</module>
+<!--
         <module>device</module>
+-->
     </modules>
 
     <dependencyManagement>
@@ -111,11 +113,13 @@
                 <artifactId>wannatrak-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
+<!--
+            <dependency>ub
                 <groupId>org.wannatrak</groupId>
                 <artifactId>wannatrak-device</artifactId>
                 <version>${project.version}</version>
             </dependency>
+-->
             <dependency>
                 <groupId>org.wannatrak</groupId>
                 <artifactId>wannatrak-middleware</artifactId>
@@ -125,16 +129,23 @@
     </dependencyManagement>
 
     <repositories>
+<!--
         <repository>
             <id>jboss</id>
             <name>JBoss repository</name>
             <url>http://repository.jboss.org/maven2</url>
         </repository>
+-->
 
         <repository>
             <id>ibiblio</id>
             <name>Ibiblio repository</name>
             <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>
+        </repository>
+
+        <repository>
+            <id>gwt-maven</id>
+            <url>http://central.maven.org/maven2/</url>
         </repository>
     </repositories>
 

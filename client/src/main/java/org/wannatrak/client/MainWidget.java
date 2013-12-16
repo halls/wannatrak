@@ -19,19 +19,18 @@
  */
 package org.wannatrak.client;
 
+import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.control.LargeMapControl;
-import com.google.gwt.maps.client.control.HierarchicalMapTypeControl;
-import com.google.gwt.maps.client.geom.LatLng;
+import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.user.client.ui.*;
+import org.wannatrak.client.demo.DemoWidget;
 import org.wannatrak.client.layout.MainWidgetLayout;
 import org.wannatrak.client.layout.MainWidgetLayoutManager;
-import org.wannatrak.client.layout.command.ShowRightWidgetCommand;
-import org.wannatrak.client.layout.command.ShowLeftWidgetCommand;
-import org.wannatrak.client.layout.command.HideRightWidgetCommand;
 import org.wannatrak.client.layout.command.HideLeftWidgetCommand;
+import org.wannatrak.client.layout.command.HideRightWidgetCommand;
+import org.wannatrak.client.layout.command.ShowLeftWidgetCommand;
+import org.wannatrak.client.layout.command.ShowRightWidgetCommand;
 import org.wannatrak.client.login.LoginWidget;
-import org.wannatrak.client.demo.DemoWidget;
 
 public class MainWidget extends FlexTable {
     private MainWidgetLayout mainWidgetLayout;
@@ -332,14 +331,18 @@ public class MainWidget extends FlexTable {
     private MapWidget createMap() {
         final LatLng tsu = LatLng.newInstance(53.5, 49.4);
 
-        final MapWidget map = new MapWidget(tsu, 12);
-        map.setContinuousZoom(true);
-        map.setScrollWheelZoomEnabled(true);
+        MapOptions mapOptions = MapOptions.newInstance();
+        mapOptions.setCenter(tsu);
+        mapOptions.setZoom(12);
+        mapOptions.setScrollWheel(true);
+        final MapWidget map = new MapWidget(mapOptions);
+        //map.setContinuousZoom(true);
+        //map.setScrollWheelZoomEnabled(true);
         map.setStylePrimaryName("map");
 
-        map.addControl(new LargeMapControl());
+        //map.addControl(new LargeMapControl());
 
-        map.addControl(new HierarchicalMapTypeControl());
+        //map.addControl(new HierarchicalMapTypeControl());
 
         return map;
     }
