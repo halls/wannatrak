@@ -90,7 +90,7 @@
     </scm>
 
     <properties>
-        <projectVersion>0.92-SNAPSHOT</projectVersion>
+        <projectVersion>0.93-SNAPSHOT</projectVersion>
 
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
@@ -101,9 +101,7 @@
 
     <modules>
         <module>middleware</module>
-<!--
         <module>device</module>
--->
     </modules>
 
     <dependencyManagement>
@@ -113,13 +111,11 @@
                 <artifactId>wannatrak-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
-<!--
-            <dependency>ub
+            <dependency>
                 <groupId>org.wannatrak</groupId>
                 <artifactId>wannatrak-device</artifactId>
                 <version>${project.version}</version>
             </dependency>
--->
             <dependency>
                 <groupId>org.wannatrak</groupId>
                 <artifactId>wannatrak-middleware</artifactId>
