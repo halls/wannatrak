@@ -47,6 +47,6 @@ public class MainWidgetLayoutManager {
 
         mainWidget.setMainWidgetLayout(layout);
 
-        //mainWidget.getMap().checkResize(); //TODO: check this method at v3
+        mainWidget.getMap().triggerResize();
     }
 }

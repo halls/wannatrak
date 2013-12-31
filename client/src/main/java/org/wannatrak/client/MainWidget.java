@@ -22,6 +22,7 @@ package org.wannatrak.client;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.base.LatLng;
+import com.google.gwt.maps.client.controls.ZoomControlOptions;
 import com.google.gwt.user.client.ui.*;
 import org.wannatrak.client.demo.DemoWidget;
 import org.wannatrak.client.layout.MainWidgetLayout;
@@ -333,8 +334,9 @@ public class MainWidget extends FlexTable {
 
         MapOptions mapOptions = MapOptions.newInstance();
         mapOptions.setCenter(tsu);
-        mapOptions.setZoom(12);
+        mapOptions.setZoom(13);
         mapOptions.setScrollWheel(true);
+        mapOptions.setZoomControl(true);
         final MapWidget map = new MapWidget(mapOptions);
         //map.setContinuousZoom(true);
         //map.setScrollWheelZoomEnabled(true);

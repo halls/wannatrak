@@ -63,9 +63,10 @@ public class MapController {
             boolean updateOnlyNew
     ) {
         final Set<Long> subjectsToShow;
+        boolean saveZoom = !updateOnlyNew;
+
         if (updateOnlyNew) {
             subjectsToShow = new HashSet<Long>(subjects);
-            subjectsToShow.removeAll(layers.keySet());
 
             for (Iterator<Long> it = layers.keySet().iterator(); it.hasNext(); ) {
                 Long subjectId = it.next();
@@ -91,8 +92,7 @@ public class MapController {
                     + "&mto=" + toMinute
                     + "&dto=" + toDaysAgo
                     + "&valid=" + !showErrors
-                    + "&format=" + DateTimeFormat.getMediumDateTimeFormat().getPattern()
-                    .replaceAll(" ", "_SPACE_")
+                    + "&format=" + DateTimeFormat.getMediumDateTimeFormat().getPattern().replaceAll(" ", "_SPACE_")
                     + "&tzoffset=" + new Date().getTimezoneOffset()
                     + "&nocache=" + Random.nextInt();
             KmlLayer route = KmlLayer.newInstance(url);
@@ -100,48 +100,14 @@ public class MapController {
             if (prevOverlay != null) {
                 prevOverlay.setMap(null);
             }
+            int zoom = mapWidget.getZoom();
             route.setMap(mapWidget);
+            if (saveZoom) {
+                mapWidget.setZoom(zoom);
+            }
+
             layers.put(subjectId, route);
             mediator.hideSubjectLoading(subjectId);
-
-
-/*
-            GeoXmlOverlay.load(
-                    "http://" + Window.Location.getHost()
-                            + "/show?subjectId=" + subjectId
-                            + "&sessionId=" + Cookies.getCookie("JSESSIONID")
-                            + "&hfrom=" + fromHour
-                            + "&mfrom=" + fromMinute
-                            + "&dfrom=" + fromDaysAgo
-                            + "&hto=" + toHour
-                            + "&mto=" + toMinute
-                            + "&dto=" + toDaysAgo
-                            + "&valid=" + !showErrors
-                            + "&format=" + DateTimeFormat.getMediumDateTimeFormat().getPattern()
-                                                .replaceAll(" ", "_SPACE_")
-                            + "&tzoffset=" + new Date().getTimezoneOffset()
-                            + "&nocache=" + Random.nextInt(),
-
-                    new GeoXmlLoadCallback() {
-                        @Override
-                        public void onFailure(String url, Throwable caught) {
-                            mediator.hideSubjectLoading(subjectId);
-                        }
-
-                        @Override
-                        public synchronized void onSuccess(String url, GeoXmlOverlay overlay) {
-                            KmlLayer route = KmlLayer.newInstance(url);
-                            KmlLayer prevOverlay = layers.get(subjectId);
-                            if (prevOverlay != null) {
-                                prevOverlay.setMap(null);
-                            }
-                            route.setMap(mapWidget);
-                            layers.put(subjectId, route);
-                            mediator.hideSubjectLoading(subjectId);
-                        }
-                    }
-            );
-*/
         }
     }
 }
