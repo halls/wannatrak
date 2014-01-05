@@ -19,17 +19,14 @@
  */
 package org.wannatrak.client;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.maps.client.MapWidget;
-
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.layers.KmlLayer;
-import com.google.gwt.maps.client.overlay.GeoXmlOverlay;
-import com.google.gwt.maps.client.overlay.GeoXmlLoadCallback;
-import com.google.gwt.maps.client.overlay.Overlay;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.maps.client.layers.KmlLayerOptions;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Random;
-import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 
 import java.util.*;
 
@@ -37,11 +34,14 @@ public class MapController {
     private final Mediator mediator;
     private final MapWidget mapWidget;
     private final Map<Long, KmlLayer> layers;
-
+    private final KmlLayerOptions options;
 
     public MapController(Mediator mediator, MapWidget mapWidget) {
         this.mediator = mediator;
         this.mapWidget = mapWidget;
+
+        options = KmlLayerOptions.newInstance();
+        options.setPreserveViewport(true);
 
         layers = new HashMap<Long, KmlLayer>();
     }
@@ -63,7 +63,6 @@ public class MapController {
             boolean updateOnlyNew
     ) {
         final Set<Long> subjectsToShow;
-        boolean saveZoom = !updateOnlyNew;
 
         if (updateOnlyNew) {
             subjectsToShow = new HashSet<Long>(subjects);
@@ -95,16 +94,9 @@ public class MapController {
                     + "&format=" + DateTimeFormat.getMediumDateTimeFormat().getPattern().replaceAll(" ", "_SPACE_")
                     + "&tzoffset=" + new Date().getTimezoneOffset()
                     + "&nocache=" + Random.nextInt();
-            KmlLayer route = KmlLayer.newInstance(url);
-            KmlLayer prevOverlay = layers.get(subjectId);
-            if (prevOverlay != null) {
-                prevOverlay.setMap(null);
-            }
-            int zoom = mapWidget.getZoom();
+            options.setPreserveViewport(!updateOnlyNew);
+            KmlLayer route = KmlLayer.newInstance(url, options);
             route.setMap(mapWidget);
-            if (saveZoom) {
-                mapWidget.setZoom(zoom);
-            }
 
             layers.put(subjectId, route);
             mediator.hideSubjectLoading(subjectId);
